@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.clm.domain.repository.user.UserRepository">
+
+    <resultMap id="userResultMap" type="User">
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="organizationId" column="organization_id" />
+        <result property="password" column="password" />
+        <result property="role" column="role" />
+    </resultMap>
+
+    <select id="findOne" parameterType="LoginRequest" resultMap="userResultMap">
+    <![CDATA[
+        SELECT * FROM public.user 
+        WHERE
+            username = #{username}
+        AND
+            organization_id = #{organizationId}
+        AND
+            password = #{password}
+    ]]>
+    </select>
+    
+    <select id="findByUsername" parameterType="string" resultMap="userResultMap">
+    <![CDATA[
+        SELECT * FROM public.user 
+        WHERE
+            username = #{username}
+    ]]>
+    </select>
+    
+    <select id="save" parameterType="User" resultMap="userResultMap">
+    <![CDATA[
+        INSERT INTO public.user(id, username, organization_id, password, role)
+        VALUES (#{id}, #{username}, #{organizationId}, #{password}, #{role})
+    ]]>
+    </select>
+    
+<!-- 
+    <select id="findAll" resultMap="todoResultMap">
+    <![CDATA[
+        SELECT
+            todo_id,
+            todo_title,
+            finished,
+            created_at
+        FROM
+            todo
+    ]]>
+    </select>
+
+    <insert id="create" parameterType="Todo">
+    <![CDATA[
+        INSERT INTO todo
+        (
+            todo_id,
+            todo_title,
+            finished,
+            created_at
+        )
+        VALUES
+        (
+            #{todoId},
+            #{todoTitle},
+            #{finished},
+            #{createdAt}
+        )
+    ]]>
+    </insert>
+
+    <update id="update" parameterType="Todo">
+    <![CDATA[
+        UPDATE todo
+        SET
+            todo_title = #{todoTitle},
+            finished = #{finished},
+            created_at = #{createdAt}
+        WHERE
+            todo_id = #{todoId}
+    ]]>
+    </update>
+
+    <delete id="delete" parameterType="Todo">
+    <![CDATA[
+        DELETE FROM
+            todo
+        WHERE
+            todo_id = #{todoId}
+    ]]>
+    </delete>
+
+    <select id="countByFinished" parameterType="Boolean"
+        resultType="Long">
+    <![CDATA[
+        SELECT
+            COUNT(*)
+        FROM
+            todo
+        WHERE
+            finished = #{finished}
+    ]]>
+    </select>
+ -->
+</mapper>

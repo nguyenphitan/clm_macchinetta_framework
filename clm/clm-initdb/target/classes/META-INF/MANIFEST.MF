@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Build-Jdk-Spec: 11
+Implementation-Title: clm-initdb
+Implementation-Version: 1.0.0-SNAPSHOT
+Implementation-Vendor: Macchinetta Framework Team
+Created-By: Maven Integration for Eclipse
+
